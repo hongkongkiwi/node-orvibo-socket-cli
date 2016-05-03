@@ -1,0 +1,28 @@
+{
+  "name": "orvibo-socket-cli",
+  "description": "Control your orvibo switch from the command line",
+  "author": {
+    "name": "Andy Savage",
+    "email": "andy@savage.hk"
+  },
+  "main": "orvibo",
+  "license": "MIT",
+  "files": [
+    "README.md",
+    "LICENSE.md",
+    "bin/control.js"
+  ],
+  "version": "1.0.0",
+  "homepage": "https://github.com/hongkongkiwi/orvibo-switch-cli",
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/hongkongkiwi/orvibo-switch-cli.git"
+  },
+  "dependencies": {
+    "bluebird": "^3.3.5",
+    "pimatic": "^0.8.107",
+    "pimatic-orvibo": "0.0.2",
+    "yargs": "^4.6.0"
+  }
+}

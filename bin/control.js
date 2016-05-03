@@ -1,0 +1,47 @@
+#!/usr/bin/env node
+
+var orvibo = require('pimatic-orvibo/orvibo-node');
+
+require('yargs')
+ .usage('$0 [options] <cmd>')
+ .option('mac', {
+   alias: 'm',
+   describe: 'mac address of switch'
+ })
+ .option('ip', {
+   alias: 'i',
+   describe: 'ip address of switch'
+ })
+ .command('on', 'turn on switch', {}, function (argv) {
+   actuate(argv.i, argv.m, 1);
+ })
+ .command('off', 'turn off switch', {}, function (argv) {
+   actuate(argv.i, argv.m, 0);
+ })
+ .command('toggle', 'toggle switch', {}, function (argv) {
+   actuate(argv.i, argv.m, -1);
+ })
+ .command('toggle', 'toggle switch', {}, function (argv) {
+   actuate(argv.i, argv.m, -2);
+ })
+ .help('help')
+ .demand(1)
+ .argv;
+
+function actuate(ip,mac,state) {
+  orvibo.on("serverReady", function() {
+    orvibo.subscribe(ip, mac);
+  });
+
+  orvibo.once('subscribeSuccessful', function(successIp, successMac, powerState){
+    if (state === -2) {
+      console.log(successIp, successMac, powerState);
+    } else {
+      orvibo.changePowerState(successIp, successMac, state === -1 ? !powerState : (state === 0 ? false : true));
+    }
+  });
+
+  orvibo.once('changePowerStateSuccessful', function(messageIp, messageMac, messagePowerState) {
+    process.exit(0);
+  });
+}
