@@ -21,7 +21,7 @@ require('yargs')
  .command('toggle', 'toggle switch', {}, function (argv) {
    actuate(argv.i, argv.m, -1);
  })
- .command('toggle', 'toggle switch', {}, function (argv) {
+ .command('status', 'get status', {}, function (argv) {
    actuate(argv.i, argv.m, -2);
  })
  .help('help')
